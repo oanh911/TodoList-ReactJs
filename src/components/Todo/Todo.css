@@ -1,0 +1,79 @@
+td {
+    height: 50px;
+    box-sizing: border-box;
+}
+
+.todo-id {
+    width: 40px;
+}
+
+.todo-title, .todo-status {
+    width: 160px;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.todo-title {
+    width: 240px;
+}
+
+.todo-title p {
+    display: block;
+}
+
+.todo-title input {
+    width: 200px;
+    height: 39px;
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin: 6px 0;
+    display: none;
+}
+
+.todo-title input:focus {
+    outline: none !important;
+    border: 1px solid black;
+}
+
+.todo-action {
+    width: 300px;
+}
+
+.edit-todo-action {
+    display: none;
+}
+
+button {
+    width: 80px;
+    height: 30px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 3px;
+    color: white;
+}
+
+.updateBtn, .updateEditBtn {
+    background-color: #5096f1;
+}
+
+.updateBtn:hover, .updateEditBtn:hover {
+    background-color: #026cf7;
+}
+
+.editBtn {
+    background-color: #f5c645;
+}
+
+.editBtn:hover {
+    background-color: #f8b600;
+}
+
+.deleteBtn, .cancelEditBtn {
+    background-color: #f8555a;
+    margin-right: 0;
+}
+
+.deleteBtn:hover, .cancelEditBtn:hover {
+    background-color: #fa0008;
+}
