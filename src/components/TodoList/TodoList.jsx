@@ -3,30 +3,32 @@ import AddTodo from "../AddTodo/AddTodo";
 import Todo from "../Todo/Todo";
 import './TodoList.css';
 
+const inProgressStatus = "In progress";
+const doneStatus = "Done";
 const initTodoList = [
     {
         title: "Todo 1",
-        status: "In progress"
+        status: inProgressStatus
     },
     {
         title: "Todo 2",
-        status: "In progress"
+        status: inProgressStatus
     },
     {
         title: "Todo 3",
-        status: "Done"
+        status: doneStatus
     },
     {
         title: "Todo 4",
-        status: "Done"
+        status: doneStatus
     },
     {
         title: "Todo 5",
-        status: "Done"
+        status: doneStatus
     },
     {
         title: "Todo 6",
-        status: "In progress"
+        status: inProgressStatus
     }
 ]
 
@@ -34,6 +36,8 @@ function TodoList(){
     const [newTodo, setNewTodo] = useState('');
     const [todoList, setTodoList] = useState(initTodoList);
     const [editedTodo, setEditedTodo] = useState('');
+    const [isEditDisplay, setIsEditDisplay] = useState(true);
+    const [editTodoId, setEditTodoId] = useState(0);
 
     const getNewTodoTitle = (event) => {
         setNewTodo(event.target.value);
@@ -57,42 +61,65 @@ function TodoList(){
         setNewTodo('');
     }
 
-    const updateTodo = (index) => {
+    // const updateTodo = (index) => {
+    //     const newTodoList = [...todoList];
+    //     newTodoList[index].status === inProgressStatus ? newTodoList[index].status = doneStatus : newTodoList[index].status = inProgressStatus;
+    //     setTodoList(newTodoList);
+    // }
+
+    //splice
+    // const updateTodo = (index, title) => {
+    //     const newTodoList = [...todoList];
+    //     if (newTodoList[index].status === inProgressStatus){
+    //         newTodoList.splice(index, 1, {
+    //             title: title,
+    //             status: doneStatus
+    //         })
+    //     }
+    //     else {
+    //         newTodoList.splice(index, 1, {
+    //             title: title,
+    //             status: inProgressStatus
+    //         })
+    //     }
+        
+    //     setTodoList(newTodoList);
+    // }
+
+    //map
+    const updateTodo = (todoId) => {
         const newTodoList = [...todoList];
-        if (newTodoList[index].status === "In progress"){
-            newTodoList[index].status = "Done";
-        }
-        else {
-            newTodoList[index].status = "In progress";
-        }
+        newTodoList.map((newTodo, index) => {
+            if (index === todoId){
+                newTodo.status === inProgressStatus ? newTodo.status = doneStatus : newTodo.status = inProgressStatus;
+            };
+        })
         setTodoList(newTodoList);
     }
 
-    const displayEditTodo = (index) => {
-        const todoTitles = document.querySelectorAll('.todo-title');
-        const todoActions = document.querySelectorAll('.todo-action');
-        todoTitles[index].firstElementChild.style.display = "none";
-        todoTitles[index].lastElementChild.style.display = "block";
-        todoActions[index].firstElementChild.style.display = "none";
-        todoActions[index].lastElementChild.style.display = "block";
+    const displayEditTodo = (todoId) => {
+        setEditTodoId(todoId)
+        setIsEditDisplay(false);
+        //console.log(isEditDisplay);
     }
 
-    const cancelEditTodo = (index) => {
-        const todoTitles = document.querySelectorAll('.todo-title');
-        const todoActions = document.querySelectorAll('.todo-action');
-        todoTitles[index].firstElementChild.style.display = "block";
-        todoTitles[index].lastElementChild.style.display = "none";
-        todoActions[index].firstElementChild.style.display = "block";
-        todoActions[index].lastElementChild.style.display = "none";
+    const cancelEditTodo = () => {
+        setIsEditDisplay(true);
+        //console.log(isEditDisplay);
     }
 
-    const editTodo = (index) => {
+    const editTodo = (todoId) => {
         const newTodoList = [...todoList];
         if (editedTodo){
-            newTodoList[index].title = editedTodo;
+            //newTodoList[index].title = editedTodo;
+            newTodoList.map((newTodo, index) => {
+                if (index === todoId && newTodo.status === inProgressStatus){
+                    newTodo.title = editedTodo;
+                };
+            })
         }
         setTodoList(newTodoList);
-        cancelEditTodo(index);
+        cancelEditTodo();
     }
 
     const deleteTodo = (index) => {
@@ -116,7 +143,7 @@ function TodoList(){
             </thead>
             <tbody>
                 {todoList.map((todo, index) => {
-                return <Todo key={index} id={index} title={todo.title} status={todo.status}
+                    return <Todo key={index} id={index} title={todo.title} status={todo.status} isEditDisplay={isEditDisplay} editTodoId={editTodoId}
                         updateTodo={updateTodo} displayEditTodo={displayEditTodo} editTodo={editTodo}
                         cancelEditTodo={cancelEditTodo} deleteTodo={deleteTodo} getEditedTodoTitle={getEditedTodoTitle} />;
                 })}

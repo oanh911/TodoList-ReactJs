@@ -28,7 +28,6 @@ td {
     border-radius: 3px;
     padding: 0 10px;
     margin: 6px 0;
-    display: none;
 }
 
 .todo-title input:focus {
@@ -40,10 +39,6 @@ td {
     width: 300px;
 }
 
-.edit-todo-action {
-    display: none;
-}
-
 button {
     width: 80px;
     height: 30px;
@@ -53,27 +48,27 @@ button {
     color: white;
 }
 
-.updateBtn, .updateEditBtn {
+.update-btn, .update-edit-btn {
     background-color: #5096f1;
 }
 
-.updateBtn:hover, .updateEditBtn:hover {
+.update-btn:hover, .update-edit-btn:hover {
     background-color: #026cf7;
 }
 
-.editBtn {
+.edit-btn {
     background-color: #f5c645;
 }
 
-.editBtn:hover {
+.edit-btn:hover {
     background-color: #f8b600;
 }
 
-.deleteBtn, .cancelEditBtn {
+.delete-btn, .cancel-edit-btn {
     background-color: #f8555a;
     margin-right: 0;
 }
 
-.deleteBtn:hover, .cancelEditBtn:hover {
+.delete-btn:hover, .cancel-edit-btn:hover {
     background-color: #fa0008;
 }
